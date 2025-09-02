@@ -379,6 +379,16 @@ main {
   animation: aniThree 13s infinite linear alternate;
 }
 
+/* Add vertical spacing between portfolio project rows */
+.portfolio-box .row {
+  margin-bottom: 3rem !important;
+}
+
+/* Extra safety: add a small gap between consecutive rows */
+.portfolio-box .row + .row {
+  margin-top: 0.5rem !important;
+}
+
 @keyframes aniOne {
   0% {
     transform: translate(0, 0) rotate(0);
