@@ -1,11 +1,11 @@
-name: Deploy to GitHub Pages
+name: Deploy to GitHub Pages (push to gh-pages)
 
 on:
   push:
-    branches:
-      - master
+    branches: [ master ]
 
 permissions:
+  contents: write
   pages: write
   id-token: write
 
@@ -16,20 +16,18 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Configure Pages
-        uses: actions/configure-pages@v3
-
-      - name: Copy site to output directory
+      - name: Prepare site directory
         run: |
-          rm -rf output || true
-          mkdir output
-          # copy site files to output, exclude git and workflow files
-          rsync -av --exclude='.git' --exclude='.github' --exclude='node_modules' ./ output/
+          rm -rf build || true
+          mkdir -p build
+          # copy site files to build, exclude git and workflow files
+          rsync -av --exclude='.git' --exclude='.github' --exclude='node_modules' ./ build/
 
-      - name: Upload artifact for GitHub Pages
-        uses: actions/upload-pages-artifact@v2
+      - name: Deploy to gh-pages branch
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          path: output
-
-      - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v1
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build
+          publish_branch: gh-pages
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
