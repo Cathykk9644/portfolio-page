@@ -250,6 +250,15 @@ main {
   }
 }
 
+/* Small-screen tweak: add spacing for GitHub buttons */
+@media (max-width: 575.98px) {
+  .github-repo-shall,
+  .github-repo-smart {
+    display: inline-block;
+    margin-top: 10px !important;
+  }
+}
+
 .home-section .container {
   position: relative;
   z-index: 1;
