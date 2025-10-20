@@ -717,3 +717,17 @@ main {
 
   max-width: 500px;
 }
+
+/* Fixed size for BBD project images (project one) - ensures consistent image display */
+#carouselProjectBBD .carousel-item img {
+  width: 100% !important;
+  height: 350px !important;
+  object-fit: cover !important;
+  object-position: center !important;
+}
+
+/* Special handling for BBD images 8 and 10 - show full image without cropping */
+#carouselProjectBBD .carousel-item img[src*="8.png"],
+#carouselProjectBBD .carousel-item img[src*="10.png"] {
+  object-fit: contain !important;
+}
